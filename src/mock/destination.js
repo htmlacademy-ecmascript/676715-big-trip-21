@@ -14,6 +14,7 @@ const getArrayPhotos = () => {
 
 function generateDestination() {
   city = getRandomArrayElement(CITIES);
+
   function getDescription() {
     const array = leaveUniqueElements(createArray(CITIES_DESCRIPTION));
     const fullDescription = array.join(' ');

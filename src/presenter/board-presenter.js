@@ -26,7 +26,7 @@ export default class BoardPresenter {
     render(
       new PointEditView({
         point: this.points[0],
-        pointDestination: this.destinationsModel.get(),
+        pointDestinations: this.destinationsModel.get(),
         pointOffers: this.offersModel.get()
       }),
       this.eventListComponent.getElement()
@@ -36,7 +36,7 @@ export default class BoardPresenter {
       render(
         new PointCreateView({
           point,
-          // дописать pointDestination
+          // дописать pointDestination ?
           pointDestination: this.destinationsModel.getById(point.destination),
           pointOffers: this.offersModel.getByType(point.type)
         }),

@@ -37,6 +37,10 @@ function formatStringToDateTime(date) {
   return dayjs(date).format('YYYY-MM-DDTHH:mm');
 }
 
+function formatStringToDateTime2(date) {
+  return dayjs(date).format('YY/MM/DD HH:mm');
+}
+
 function formatStringToShortDate(date) {
   return dayjs(date).format('MMM DD');
 }
@@ -45,4 +49,4 @@ function formatStringToTime(date) {
   return dayjs(date).format('HH:mm');
 }
 
-export {getRandomInteger, getRandomArrayElement, createArray, leaveUniqueElements, getRandomPhoto, formatStringToDateTime, formatStringToShortDate, formatStringToTime};
+export {getRandomInteger, getRandomArrayElement, createArray, leaveUniqueElements, getRandomPhoto, formatStringToDateTime, formatStringToDateTime2, formatStringToShortDate, formatStringToTime};

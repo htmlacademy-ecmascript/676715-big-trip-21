@@ -5,6 +5,7 @@ export default class DestinationsModel {
   }
 
   get() {
+    // console.log(`dest-modele - get - this.destinations: ${this.destinations}`);
     return this.destinations;
   }
 
