@@ -5,7 +5,7 @@ function generateOffer(type) {
   const offer = {
     id: crypto.randomUUID(),
     title: `Offer ${type}`,
-    price: getRandomInteger(Price.MIN, Price.MAX / 10)
+    price: getRandomInteger(Price.MIN, (Price.MAX / 10))
   };
   return offer;
 }
