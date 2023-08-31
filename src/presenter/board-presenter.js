@@ -2,11 +2,17 @@ import SortView from '../view/sort-view.js';
 import EventListView from '../view/event-list-view.js';
 import PointCreateView from '../view/form-creation-view.js';
 import PointEditView from '../view/form-editing-view.js';
-import {render} from '../render.js';
+// import {render} from '../render.js';
+import {render} from '../framework/render.js';
 
 // import {POINT_COUNT} from '../const.js';
 
 export default class BoardPresenter {
+  // #sortComponent = null;
+  // #eventListComponent = null;
+
+  // #sortComponent = new SortView();
+  // #eventListComponent = new EventListView();
   sortComponent = new SortView();
   eventListComponent = new EventListView();
 
@@ -29,7 +35,8 @@ export default class BoardPresenter {
         pointDestinations: this.destinationsModel.get(),
         pointOffers: this.offersModel.get()
       }),
-      this.eventListComponent.getElement()
+      // this.eventListComponent.getElement()
+      this.eventListComponent.element
     );
 
     this.points.forEach((point) => {
@@ -40,7 +47,8 @@ export default class BoardPresenter {
           pointDestination: this.destinationsModel.getById(point.destination),
           pointOffers: this.offersModel.getByType(point.type)
         }),
-        this.eventListComponent.getElement()
+        // this.eventListComponent.getElement()
+        this.eventListComponent.element
       );
     });
 

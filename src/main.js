@@ -5,7 +5,8 @@ import MockService from './service/mock-service.js';
 import DestinationsModel from './model/destinations-model.js';
 import OffersModel from './model/offer-model.js';
 import PointsModel from './model/point-model.js';
-import {render, RenderPosition} from './render.js';
+// import {render, RenderPosition} from './render.js';
+import {render, RenderPosition} from './framework/render.js';
 
 // временный импорт для проверки
 // import {generateDestination} from './mock/destination.js';
