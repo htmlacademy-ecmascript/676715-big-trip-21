@@ -5,12 +5,7 @@ import MockService from './service/mock-service.js';
 import DestinationsModel from './model/destinations-model.js';
 import OffersModel from './model/offer-model.js';
 import PointsModel from './model/point-model.js';
-// import {render, RenderPosition} from './render.js';
 import {render, RenderPosition} from './framework/render.js';
-
-// временный импорт для проверки
-// import {generateDestination} from './mock/destination.js';
-// import {generateOffer} from './mock/offer.js';
 
 // const bodyElement = document.querySelector('body');
 // const headerElement = document.querySelector('.page-header');
@@ -36,7 +31,10 @@ render(new FilterView(), filterElement);
 
 boardPresenter.init();
 
-// mockCities.forEach((city) => console.log(city));
+// временный импорт для проверки
+// import {generateDestination} from './mock/destination.js';
+// import {generateOffer} from './mock/offer.js';
 
+// mockCities.forEach((city) => console.log(city));
 // console.log(generateDestination());
 // console.log(generateOffer('taxi'));
