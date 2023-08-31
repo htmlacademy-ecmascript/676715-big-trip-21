@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 // import {POINT_EMPTY, TYPES} from '../const.js';
 import {TYPES} from '../const.js';
 import {formatStringToDateTime2} from '../utils.js';
@@ -130,37 +130,59 @@ function createPointEditTemplate ({point, pointDestinations, pointOffers}) {
   `;
 }
 
-export default class PointEditView {
+export default class PointEditView extends AbstractView {
+  #point = null;
+  #pointDestinations = null;
+  #pointOffers = null;
+
   // constructor({point = POINT_EMPTY, pointDestinations, pointOffers}) {
   constructor({point, pointDestinations, pointOffers}) {
-    this.point = point;
-    this.pointDestinations = pointDestinations;
-    this.pointOffers = pointOffers;
+    super();
+    this.#point = point;
+    this.#pointDestinations = pointDestinations;
+    this.#pointOffers = pointOffers;
   }
 
-  // constructor({point, pointDestinations, pointOffers}) {
-  //   this.point = point;
-  //   this.pointDestinations = pointDestinations;
-  //   this.pointOffers = pointOffers;
-  // }
-
-  getTemplate() {
+  get template() {
     return createPointEditTemplate({
-      point: this.point,
-      pointDestinations: this.pointDestinations,
-      pointOffers: this.pointOffers
+      point: this.#point,
+      pointDestinations: this.#pointDestinations,
+      pointOffers: this.#pointOffers
     });
   }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
-  }
 }
+
+// export default class PointEditView {
+//   // constructor({point = POINT_EMPTY, pointDestinations, pointOffers}) {
+//   constructor({point, pointDestinations, pointOffers}) {
+//     this.point = point;
+//     this.pointDestinations = pointDestinations;
+//     this.pointOffers = pointOffers;
+//   }
+
+//   // constructor({point, pointDestinations, pointOffers}) {
+//   //   this.point = point;
+//   //   this.pointDestinations = pointDestinations;
+//   //   this.pointOffers = pointOffers;
+//   // }
+
+//   getTemplate() {
+//     return createPointEditTemplate({
+//       point: this.point,
+//       pointDestinations: this.pointDestinations,
+//       pointOffers: this.pointOffers
+//     });
+//   }
+
+//   getElement() {
+//     if (!this.element) {
+//       this.element = createElement(this.getTemplate());
+//     }
+
+//     return this.element;
+//   }
+
+//   removeElement() {
+//     this.element = null;
+//   }
+// }
