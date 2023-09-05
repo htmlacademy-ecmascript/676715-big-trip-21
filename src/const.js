@@ -1,4 +1,4 @@
-const POINT_COUNT = 3;
+const POINT_COUNT = 5;
 
 const DESTINATION_COUNT = 3;
 

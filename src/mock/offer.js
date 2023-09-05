@@ -1,4 +1,4 @@
-import {getRandomInteger} from '../utils.js';
+import {getRandomInteger} from '../utils/common.js';
 import {Price} from '../mock/const.js';
 
 function generateOffer(type) {
