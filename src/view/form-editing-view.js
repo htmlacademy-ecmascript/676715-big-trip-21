@@ -1,9 +1,8 @@
 import AbstractView from '../framework/view/abstract-view.js';
 // import {POINT_EMPTY, TYPES} from '../const.js';
 import {TYPES} from '../const.js';
-import {formatStringToDateTime2} from '../utils.js';
+import {formatStringToDateTime2} from '../utils/point.js';
 import {CITIES} from '../mock/const.js';
-
 
 function showDestinationPhotos (photos) {
   /*html*/
@@ -96,10 +95,10 @@ function createPointEditTemplate ({point, pointDestinations, pointOffers}) {
 
           <div class="event__field-group  event__field-group--price">
             <label class="event__label" for="event-price-1">
-              <span class="visually-hidden">Price</span>${basePrice}
+              <span class="visually-hidden">Price</span>
               &euro;
             </label>
-            <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="">
+            <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${basePrice}">
           </div>
 
           <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
@@ -134,13 +133,22 @@ export default class PointEditView extends AbstractView {
   #point = null;
   #pointDestinations = null;
   #pointOffers = null;
+  #onResetClick = null;
+  #onSubmitClick = null;
 
-  // constructor({point = POINT_EMPTY, pointDestinations, pointOffers}) {
-  constructor({point, pointDestinations, pointOffers}) {
+  // constructor({point = POINT_EMPTY, pointDestinations, pointOffers, onResetClick, onSubmitClick}) {
+  constructor({point, pointDestinations, pointOffers, onResetClick, onSubmitClick}) {
     super();
     this.#point = point;
     this.#pointDestinations = pointDestinations;
     this.#pointOffers = pointOffers;
+    this.#onResetClick = onResetClick;
+    this.#onSubmitClick = onSubmitClick;
+
+    this.element.querySelector('.event__reset-btn').addEventListener('click', this.#resetButtonClickHandler);
+    // this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#resetButtonClickHandler);
+    this.element.querySelector('form').addEventListener('submit', this.#pointSubmitHandler);
+    // this.element.querySelector('.event__save-btn').addEventListener('submit', this.#pointSubmitHandler);
   }
 
   get template() {
@@ -150,39 +158,14 @@ export default class PointEditView extends AbstractView {
       pointOffers: this.#pointOffers
     });
   }
+
+  #resetButtonClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onResetClick();
+  };
+
+  #pointSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this.#onSubmitClick();
+  };
 }
-
-// export default class PointEditView {
-//   // constructor({point = POINT_EMPTY, pointDestinations, pointOffers}) {
-//   constructor({point, pointDestinations, pointOffers}) {
-//     this.point = point;
-//     this.pointDestinations = pointDestinations;
-//     this.pointOffers = pointOffers;
-//   }
-
-//   // constructor({point, pointDestinations, pointOffers}) {
-//   //   this.point = point;
-//   //   this.pointDestinations = pointDestinations;
-//   //   this.pointOffers = pointOffers;
-//   // }
-
-//   getTemplate() {
-//     return createPointEditTemplate({
-//       point: this.point,
-//       pointDestinations: this.pointDestinations,
-//       pointOffers: this.pointOffers
-//     });
-//   }
-
-//   getElement() {
-//     if (!this.element) {
-//       this.element = createElement(this.getTemplate());
-//     }
-
-//     return this.element;
-//   }
-
-//   removeElement() {
-//     this.element = null;
-//   }
-// }

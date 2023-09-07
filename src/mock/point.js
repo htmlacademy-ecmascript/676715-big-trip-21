@@ -1,4 +1,4 @@
-import {getRandomInteger} from '../utils.js';
+import {getRandomInteger} from '../utils/common.js';
 import {getDate} from '../mock/utils.js';
 import {Price} from '../mock/const.js';
 

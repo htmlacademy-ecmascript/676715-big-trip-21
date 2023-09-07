@@ -1,59 +1,93 @@
+import EventListEmptyView from '../view/event-list-empty-view.js';
 import SortView from '../view/sort-view.js';
 import EventListView from '../view/event-list-view.js';
 import PointCreateView from '../view/form-creation-view.js';
 import PointEditView from '../view/form-editing-view.js';
-// import {render} from '../render.js';
-import {render} from '../framework/render.js';
-
-// import {POINT_COUNT} from '../const.js';
+import {render, replace} from '../framework/render.js';
 
 export default class BoardPresenter {
-  // #sortComponent = null;
-  // #eventListComponent = null;
+  #container = null;
+  #destinationsModel = null;
+  #offersModel = null;
+  #pointsModel = null;
 
-  // #sortComponent = new SortView();
-  // #eventListComponent = new EventListView();
-  sortComponent = new SortView();
-  eventListComponent = new EventListView();
+  #sortComponent = new SortView();
+  #eventListComponent = null;
+
+  #points = [];
 
   constructor({container, destinationsModel, offersModel, pointsModel}) {
-    this.container = container;
-    this.destinationsModel = destinationsModel;
-    this.offersModel = offersModel;
-    this.pointsModel = pointsModel;
+    this.#container = container;
+    this.#destinationsModel = destinationsModel;
+    this.#offersModel = offersModel;
+    this.#pointsModel = pointsModel;
 
-    this.points = [...pointsModel.get()];
+    this.#points = [...this.#pointsModel.get()];
   }
 
   init() {
-    render(this.sortComponent, this.container);
-    render(this.eventListComponent, this.container);
+    if (this.#points.length === 0) {
+      render(new EventListEmptyView(), this.#container);
+      return;
+    }
 
-    render(
-      new PointEditView({
-        point: this.points[0],
-        pointDestinations: this.destinationsModel.get(),
-        pointOffers: this.offersModel.get()
-      }),
-      // this.eventListComponent.getElement()
-      this.eventListComponent.element
-    );
+    this.#eventListComponent = new EventListView();
 
-    this.points.forEach((point) => {
-      render(
-        new PointCreateView({
-          point,
-          // дописать pointDestination ?
-          pointDestination: this.destinationsModel.getById(point.destination),
-          pointOffers: this.offersModel.getByType(point.type)
-        }),
-        // this.eventListComponent.getElement()
-        this.eventListComponent.element
-      );
+    render(this.#sortComponent, this.#container);
+    render(this.#eventListComponent, this.#container);
+
+    this.#points.forEach((point) => {
+      this.#renderPoint(point);
+    });
+  }
+
+  #renderPoint = (point) => {
+    const pointCreateComponent = new PointCreateView({
+      point,
+      pointDestination: this.#destinationsModel.getById(point.destination),
+      pointOffers: this.#offersModel.getByType(point.type),
+      onEditClick: pointEditClickHandler
     });
 
-    // for (let i = 0; i < POINT_COUNT; i++) {
-    //   render(new PointCreateView(), this.eventListComponent.getElement());
-    // }
-  }
+    const pointEditComponent = new PointEditView({
+      point,
+      pointDestinations: this.#destinationsModel.get(),
+      pointOffers: this.#offersModel.get(),
+      onResetClick: resetButtonClickHandler,
+      onSubmitClick: pointSubmitHandler
+    });
+
+    const replacePointToForm = () => {
+      replace(pointEditComponent, pointCreateComponent);
+    };
+
+    const replaceFormToPoint = () => {
+      replace(pointCreateComponent, pointEditComponent);
+    };
+
+    const escKeyHandler = (evt) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        evt.preventDefault();
+        replaceFormToPoint();
+        document.removeEventListener('keydown', escKeyHandler);
+      }
+    };
+
+    function pointEditClickHandler() {
+      replacePointToForm();
+      document.addEventListener('keydown', escKeyHandler);
+    }
+
+    function resetButtonClickHandler() {
+      replaceFormToPoint();
+      document.removeEventListener('keydown', escKeyHandler);
+    }
+
+    function pointSubmitHandler() {
+      replaceFormToPoint();
+      document.removeEventListener('keydown', escKeyHandler);
+    }
+
+    render (pointCreateComponent, this.#eventListComponent.element);
+  };
 }

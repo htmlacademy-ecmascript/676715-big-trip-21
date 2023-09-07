@@ -1,4 +1,4 @@
-const POINT_COUNT = 3;
+const POINT_COUNT = 5;
 
 const DESTINATION_COUNT = 3;
 
@@ -28,4 +28,11 @@ const POINT_EMPTY = {
   type: DEFAULT_TYPE
 };
 
-export {POINT_COUNT, DESTINATION_COUNT, OFFER_COUNT, TYPES, POINT_EMPTY};
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PRESENT: 'present',
+  PAST: 'past'
+};
+
+export {POINT_COUNT, DESTINATION_COUNT, OFFER_COUNT, TYPES, POINT_EMPTY, FilterType};

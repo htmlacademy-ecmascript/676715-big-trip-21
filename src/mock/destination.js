@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getRandomInteger, createArray, leaveUniqueElements, getRandomPhoto} from '../utils.js';
+import {getRandomArrayElement, getRandomInteger, createArray, leaveUniqueElements, getRandomPhoto} from '../utils/common.js';
 import {CITIES, CITIES_DESCRIPTION} from '../mock/const.js';
 
 let city;
