@@ -147,8 +147,8 @@ export default class PointEditView extends AbstractView {
 
     this.element.querySelector('.event__reset-btn').addEventListener('click', this.#resetButtonClickHandler);
     // this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#resetButtonClickHandler);
-    this.element.querySelector('form').addEventListener('submit', this.#pointSubmitHandler);
-    // this.element.querySelector('.event__save-btn').addEventListener('submit', this.#pointSubmitHandler);
+    // this.element.querySelector('form').addEventListener('submit', this.#pointSubmitHandler);
+    this.element.querySelector('.event--edit').addEventListener('submit', this.#pointSubmitHandler);
   }
 
   get template() {
@@ -166,6 +166,7 @@ export default class PointEditView extends AbstractView {
 
   #pointSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#onSubmitClick();
+    // this.#onSubmitClick();
+    this.#onSubmitClick(this.#point);
   };
 }

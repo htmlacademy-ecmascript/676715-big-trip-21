@@ -1,4 +1,4 @@
-const POINT_COUNT = 5;
+const POINT_COUNT = 2;
 
 const DESTINATION_COUNT = 3;
 
@@ -35,4 +35,9 @@ const FilterType = {
   PAST: 'past'
 };
 
-export {POINT_COUNT, DESTINATION_COUNT, OFFER_COUNT, TYPES, POINT_EMPTY, FilterType};
+const Mode = {
+  DEFAULT: 'default',
+  EDITING: 'editing'
+};
+
+export {POINT_COUNT, DESTINATION_COUNT, OFFER_COUNT, TYPES, POINT_EMPTY, FilterType, Mode};
