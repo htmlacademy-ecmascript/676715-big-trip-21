@@ -30,11 +30,3 @@ render(new PointInfoView(), tripInfoElement, RenderPosition.AFTERBEGIN);
 render(new FilterView(), filterElement);
 
 boardPresenter.init();
-
-// временный импорт для проверки
-// import {generateDestination} from './mock/destination.js';
-// import {generateOffer} from './mock/offer.js';
-
-// mockCities.forEach((city) => console.log(city));
-// console.log(generateDestination());
-// console.log(generateOffer('taxi'));

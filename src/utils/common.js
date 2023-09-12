@@ -15,7 +15,7 @@ const createArray = (dates) => Array.from({length: getRandomInteger(1, dates.len
 
 const leaveUniqueElements = (array) => array.filter((item, i) => i === array.indexOf(item));
 
-function getRandomPhoto () {
+function getRandomPhoto() {
   const x = getRandomInteger(1, 20);
   const photo = {
     'src': `https://loremflickr.com/248/152?random=${x}`,
@@ -24,4 +24,8 @@ function getRandomPhoto () {
   return photo;
 }
 
-export {getRandomInteger, getRandomArrayElement, createArray, leaveUniqueElements, getRandomPhoto};
+function updateItem (items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
+}
+
+export {getRandomInteger, getRandomArrayElement, createArray, leaveUniqueElements, getRandomPhoto, updateItem};
