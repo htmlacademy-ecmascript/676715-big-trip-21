@@ -42,7 +42,7 @@ export default class PointPresenter {
       point: this.#point,
       pointDestinations: this.#destinationsModel.get(),
       pointOffers: this.#offersModel.get(),
-      onResetClick: this.#resetButtonClickHandler,
+      onResetClick: this.#resetClickHandler,
       onSubmitClick: this.#formSubmitHandler
     });
 
@@ -90,25 +90,21 @@ export default class PointPresenter {
   #escKeyHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
+      this.#pointEditComponent.reset(this.#point);
       this.#replaceFormToPoint();
     }
   };
 
-  // #editClickHandler = () => this.#replacePointToForm();
   #editClickHandler = () => {
     this.#replacePointToForm();
   };
 
-  // #favoriteClickHandler = () => this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite});
   #favoriteClickHandler = () => {
-    this.#handleDataChange({
-      ...this.#point,
-      isFavorite: !this.#point.isFavorite
-    });
+    this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite});
   };
 
-  // #resetButtonClickHandler = () => this.#replaceFormToPoint();
-  #resetButtonClickHandler = () => {
+  #resetClickHandler = () => {
+    this.#pointEditComponent.reset(this.#point);
     this.#replaceFormToPoint();
   };
 
