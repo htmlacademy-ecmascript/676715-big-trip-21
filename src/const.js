@@ -28,6 +28,28 @@ const POINT_EMPTY = {
   type: DEFAULT_TYPE
 };
 
+const Mode = {
+  DEFAULT: 'DEFAULT',
+  EDITING: 'EDITING'
+};
+
+const EditType = {
+  CREATING: 'creating',
+  EDITING: 'editing'
+};
+
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+  CREATE_POINT: 'CREATE_POINT'
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR'
+};
+
 const FilterType = {
   EVERYTHING: 'everything',
   FUTURE: 'future',
@@ -35,9 +57,20 @@ const FilterType = {
   PAST: 'past'
 };
 
-const Mode = {
-  DEFAULT: 'default',
-  EDITING: 'editing'
+const SortType = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFER: 'offer'
 };
 
-export {POINT_COUNT, DESTINATION_COUNT, OFFER_COUNT, TYPES, POINT_EMPTY, FilterType, Mode};
+const enabledSortType = {
+  [SortType.DAY]: true,
+  [SortType.EVENT]: false,
+  [SortType.TIME]: true,
+  [SortType.PRICE]: true,
+  [SortType.OFFER]: false
+};
+
+export {POINT_COUNT, DESTINATION_COUNT, OFFER_COUNT, TYPES, POINT_EMPTY, FilterType, Mode, EditType, UserAction, UpdateType, SortType, enabledSortType};

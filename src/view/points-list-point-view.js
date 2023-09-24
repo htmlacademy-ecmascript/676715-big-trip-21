@@ -74,7 +74,7 @@ function createPointTemplate({point, pointDestination, pointOffers}) {
   `;
 }
 
-export default class PointCreateView extends AbstractView {
+export default class PointView extends AbstractView {
   #point = null;
   #pointDestination = null;
   #pointOffers = null;
