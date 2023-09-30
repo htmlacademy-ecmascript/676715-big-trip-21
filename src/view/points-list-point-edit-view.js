@@ -319,7 +319,10 @@ export default class PointEditView extends AbstractStatefulView {
 
   _restoreHandlers = () => {
     if (this.#type === EditType.EDITING) {
-      this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupClickHandler);
+      const rollupButton = this.element.querySelector('.event__rollup-btn');
+      if (rollupButton) {
+        this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#rollupClickHandler);
+      }
       this.element.querySelector('.event__reset-btn').addEventListener('click', this.#deleteClickHandler);
     }
 
@@ -428,6 +431,5 @@ export default class PointEditView extends AbstractStatefulView {
   };
 
   static parsePointToState = ({point}) => ({point});
-
   static parseStateToPoint = (state) => state.point;
 }
