@@ -1,5 +1,5 @@
 import AbstractView from '../framework/view/abstract-view.js';
-import {formatStringToDateTime, formatStringToShortDate, formatStringToTime} from '../utils/point.js';
+import {formatStringToDateTime, formatStringToShortDate, formatStringToTime, getPointDuration} from '../utils/point.js';
 
 function createScheduleTemplate({dateFrom, dateTo}) {
   /*html*/
@@ -10,7 +10,7 @@ function createScheduleTemplate({dateFrom, dateTo}) {
         &mdash;
         <time class="event__end-time" datetime=${formatStringToDateTime(dateTo)}>${formatStringToTime(dateTo)}</time>
       </p>
-      <p class="event__duration">30M</p>
+      <p class="event__duration">${getPointDuration(dateFrom, dateTo)}</p>
     </div>
   `;
 }
@@ -62,7 +62,7 @@ function createPointTemplate({point, pointDestination, pointOffers}) {
         <div class="event__type">
           <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
         </div>
-        <h3 class="event__title">${type} ${pointDestination.name}</h3>
+        <h3 class="event__title">${type} ${pointDestination ? pointDestination.name : ''}</h3>
         ${createScheduleTemplate({dateFrom, dateTo})}
         <p class="event__price">
           &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
@@ -74,7 +74,7 @@ function createPointTemplate({point, pointDestination, pointOffers}) {
   `;
 }
 
-export default class PointCreateView extends AbstractView {
+export default class PointView extends AbstractView {
   #point = null;
   #pointDestination = null;
   #pointOffers = null;

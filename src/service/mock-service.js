@@ -6,46 +6,58 @@ import {getRandomInteger, getRandomArrayElement} from '../utils/common.js';
 // дополнить util.js - getRandomValue?
 
 export default class MockService {
-  destinations = [];
-  offers = [];
-  points = [];
+  #destinations = [];
+  #offers = [];
+  #points = [];
 
   constructor() {
-    this.destinations = this.generateDestinations();
-    this.offers = this.generateOffers();
-    this.points = this.generatePoints();
+    this.#destinations = this.#generateDestinations();
+    this.#offers = this.#generateOffers();
+    this.#points = this.#generatePoints();
   }
 
   getDestinations() {
-    return this.destinations;
+    return this.#destinations;
   }
 
   getOffers() {
-    return this.offers;
+    return this.#offers;
   }
 
   getPoints() {
-    return this.points;
+    return this.#points;
   }
 
-  generateDestinations() {
+  #generateDestinations() {
     return Array.from({length: DESTINATION_COUNT}, () => generateDestination());
   }
 
-  generateOffers() {
+  #generateOffers() {
     return TYPES.map((type) => ({type, offers: Array.from({length: getRandomInteger(0, OFFER_COUNT)}, () => generateOffer(type))}));
   }
 
-  generatePoints() {
+  #generatePoints() {
     return Array.from({length: POINT_COUNT}, () => {
       // вместо getRandomValue?
       const type = getRandomArrayElement(TYPES);
-      const destination = getRandomArrayElement(this.destinations);
+      const destination = getRandomArrayElement(this.#destinations);
       const hasOffers = getRandomInteger(0, 1);
-      const offersByType = this.offers.find((offerByType) => offerByType.type === type);
+      const offersByType = this.#offers.find((offerByType) => offerByType.type === type);
       const offerIds = (hasOffers) ? offersByType.offers.slice(0, getRandomInteger(0, OFFER_COUNT)).map((offer) => offer.id) : [];
 
       return generatePoint(type, destination.id, offerIds);
     });
+  }
+
+  updatePoint(updatedPoint) {
+    return updatedPoint;
+  }
+
+  addPoint(data) {
+    return {...data, id: crypto.randomUUID()};
+  }
+
+  deletePoint() {
+    //
   }
 }

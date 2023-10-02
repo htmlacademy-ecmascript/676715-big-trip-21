@@ -29,3 +29,4 @@ function updateItem (items, update) {
 }
 
 export {getRandomInteger, getRandomArrayElement, createArray, leaveUniqueElements, getRandomPhoto, updateItem};
+// export {getRandomInteger, getRandomArrayElement, createArray, leaveUniqueElements, getRandomPhoto};
