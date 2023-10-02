@@ -1,6 +1,12 @@
 import {SortType} from '../const.js';
 import {getPointsDateDifference, getPointsDurationDifference, getPointsPriceDifference} from './point.js';
 
+if(!Array.prototype.toSorted) {
+  Array.prototype.toSorted = function(fn) {
+    return[...this].sort(fn);
+  };
+}
+
 const sort = {
   [SortType.DAY]: (points) => points.toSorted(getPointsDateDifference),
   [SortType.PRICE]: (points) => points.toSorted(getPointsPriceDifference),

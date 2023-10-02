@@ -1,5 +1,7 @@
 import FilterView from '../view/filter-view.js';
 // import {generateFilters} from '../mock/filter.js';
+// import {FilterType, UpdateType} from '../const.js';
+// import {UpdateType} from '../const.js';
 import {render, replace} from '../framework/render.js';
 import {filter} from '../utils/filter.js';
 
@@ -27,6 +29,10 @@ export default class FilterPresenter {
     const points = this.#pointsModel.get();
 
     return Object.entries(filter).map(([filterType, filterPoints]) => ({type: filterType, hasPoints: filterPoints(points).length > 0}));
+    // return Object.values(FilterType).map((type) => ({
+    //   type,
+    //   count: filter[type](points).length
+    // }));
   }
 
   init() {
@@ -57,6 +63,7 @@ export default class FilterPresenter {
       return;
     }
     this.#filterModel.set(filterType);
+    // this.#filterModel.set(UpdateType.MAJOR, filterType);
   };
 }
 

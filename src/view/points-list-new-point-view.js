@@ -16,7 +16,7 @@ export default class NewPointButtonView extends AbstractStatefulView {
     this.#handleClick = onClick;
 
     // this._setState(NewPointButtonView.parseButtonToState({disabled}));
-    this._setState(NewPointButtonView.parseButtonToState(disabled));
+    this._setState(NewPointButtonView.parseButtonToState({disabled}));
     this._restoreHandlers();
   }
 
@@ -26,11 +26,11 @@ export default class NewPointButtonView extends AbstractStatefulView {
 
   setDisabled(disabled) {
     // this.updateElement(NewPointButtonView.parseButtonToState({disabled}));
-    this.updateElement(NewPointButtonView.parseButtonToState(disabled));
+    this.updateElement(NewPointButtonView.parseButtonToState({disabled}));
   }
 
   _restoreHandlers() {
-    this.element.addEventListener('click',this.#clickHandler);
+    this.element.addEventListener('click', this.#clickHandler);
   }
 
   #clickHandler = (evt) => {

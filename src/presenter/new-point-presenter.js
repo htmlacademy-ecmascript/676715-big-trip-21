@@ -1,5 +1,5 @@
 import PointEditView from '../view/points-list-point-edit-view.js';
-import {render, remove, RenderPosition} from '../framework/render.js';
+import {render, RenderPosition, remove} from '../framework/render.js';
 // import {remove} from '../framework/render.js';
 import {UserAction, UpdateType, Mode} from '../const.js';
 import {EditType} from '../const.js';
@@ -86,9 +86,10 @@ export default class NewPointPresenter {
   };
 
   #formSubmitHandler = (point) => {
-    // this.#handleDataChange(UserAction.CREATE_POINT, UpdateType.MAJOR, point);
-    this.#handleDataChange(UserAction.CREATE_POINT, UpdateType.MINOR, point);
-    this.destroy({isCanceled: false});
+    this.#handleDataChange(UserAction.CREATE_POINT, UpdateType.MAJOR, point);
+    // this.#handleDataChange(UserAction.CREATE_POINT, UpdateType.MINOR, point);
+    // this.destroy({isCanceled: false});
+    this.destroy(false);
   };
 }
 
