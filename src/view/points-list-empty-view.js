@@ -21,6 +21,7 @@ export default class PointsListEmptyView extends AbstractView {
   // constructor({filterType}) {
   constructor(filterType) {
     super();
+
     this.#filterType = filterType;
   }
 

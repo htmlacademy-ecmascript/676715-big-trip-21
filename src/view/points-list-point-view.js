@@ -1,3 +1,4 @@
+
 import AbstractView from '../framework/view/abstract-view.js';
 import {formatStringToDateTime, formatStringToShortDate, formatStringToTime, getPointDuration} from '../utils/point.js';
 

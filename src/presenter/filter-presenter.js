@@ -14,7 +14,7 @@ export default class FilterPresenter {
   #currentFilter = null;
   // #filters = [];
 
-  constructor({container, filterModel, pointsModel}){
+  constructor({container, pointsModel, filterModel}){
     this.#container = container;
     this.#pointsModel = pointsModel;
     this.#filterModel = filterModel;

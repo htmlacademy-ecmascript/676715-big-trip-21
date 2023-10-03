@@ -86,8 +86,8 @@ export default class NewPointPresenter {
   };
 
   #formSubmitHandler = (point) => {
-    this.#handleDataChange(UserAction.CREATE_POINT, UpdateType.MAJOR, point);
-    // this.#handleDataChange(UserAction.CREATE_POINT, UpdateType.MINOR, point);
+    this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point);
+    // this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MINOR, point);
     // this.destroy({isCanceled: false});
     this.destroy(false);
   };
