@@ -169,7 +169,6 @@ export default class BoardPresenter {
   };
 
   #renderLoading() {
-    // render(this.#loadingComponent, this.#pointsListContainer, RenderPosition.AFTERBEGIN);
     render(this.#loadingComponent, this.#pointsListContainer, RenderPosition.AFTERBEGIN);
     // render(this.#loadingComponent, this.#pointsListContainer);
   }

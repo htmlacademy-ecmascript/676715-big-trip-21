@@ -1,5 +1,5 @@
 import {getRandomArrayElement, getRandomInteger, createArray, leaveUniqueElements, getRandomPhoto} from '../utils/common.js';
-import {CITIES, CITIES_DESCRIPTION} from '../mock/const.js';
+import {CITIES, CITIES_DESCRIPTION} from './const';
 
 let city;
 
@@ -24,7 +24,7 @@ function generateDestination() {
     id: crypto.randomUUID(),
     name: city,
     description: getDescription(),
-    photos: leaveUniqueElements(getArrayPhotos()),
+    pictures: leaveUniqueElements(getArrayPhotos()),
   };
   return destination;
 }

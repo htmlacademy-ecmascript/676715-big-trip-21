@@ -9,7 +9,7 @@ export default class OffersModel {
 
   async init() {
     // this.#destinations = await this.#service.destinations;
-    this.#offers = await this.#service.offers();
+    this.#offers = await this.#service.offers;
     // console.log(`this.offers: ${this.#offers}`);
     return this.#offers;
   }

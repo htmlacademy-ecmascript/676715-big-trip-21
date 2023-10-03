@@ -74,7 +74,7 @@ function showDestinationDescriptionPhotos (pointDestination) {
 
       <div class="event__photos-container">
         <div class="event__photos-tape">
-        ${showDestinationPhotos(pointDestination.photos)}
+        ${showDestinationPhotos(pointDestination.pictures)}
         </div>
       </div>
     </section>
@@ -305,7 +305,8 @@ function createPointEditTemplate ({state, pointDestinations, pointOffers, type})
 
             <div class="event__photos-container">
               <div class="event__photos-tape">
-              ${(pointDestination) ? showDestinationPhotos(pointDestination.photos) : ''}
+
+              ${(pointDestination) ? showDestinationPhotos(pointDestination.pictures) : ''}
               </div>
             </div>
           </section>-->
