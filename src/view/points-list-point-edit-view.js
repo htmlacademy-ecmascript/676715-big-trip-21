@@ -1,32 +1,52 @@
-import flatpickr from 'flatpickr';
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 // import {POINT_EMPTY, TYPES} from '../const.js';
 import {POINT_EMPTY, TYPES, EditType} from '../const.js';
 import {getScheduleDate, capitalizeFirstLetter} from '../utils/point.js';
 // import {CITIES} from '../mock/const.js';
 
+import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import he from 'he';
 
 const ButtonLabel = {
-  CANCEL: 'Cancel',
-  DELETE: 'Delete',
+  CANCEL_DEFAULT: 'Cancel',
+  DELETE_DEFAULT: 'Delete',
+  DELETE_IN_PROGRESS: 'Deleting...',
+  SAVE_DEFAULT: 'Save',
+  SAVE_IN_PROGRESS: 'Saving...',
 };
 
-function createCancelDeleteButton ({type}) {
-  const label = type === EditType.CREATING ? ButtonLabel.CANCEL : ButtonLabel.DELETE;
+function createCancelDeleteButton ({type, isDeleting, isDisabled}) {
+  let label;
+
+  if (type === EditType.CREATING) {
+    label = ButtonLabel.CANCEL_DEFAULT;
+  } else {
+    label = isDeleting ? ButtonLabel.DELETE_IN_PROGRESS : ButtonLabel.DELETE_DEFAULT;
+  }
 
   /* html */
   return `
-    <button class="event__reset-btn" type="reset">${label}</button>
+    <button class="event__reset-btn" type="reset" ${(isDisabled) ? 'disabled' : ''}>${label}</button>
   `;
 }
 
-function pointEditControls ({type, point}) {
+function createSaveButton ({isSaving, isDisabled}) {
+  const label = isSaving ? ButtonLabel.SAVE_IN_PROGRESS : ButtonLabel.SAVE_DEFAULT;
+
+  /* html */
+  return `
+    <button class="event__save-btn btn btn--blue" type="submit" ${(isDisabled) ? 'disabled' : ''}>${label}</button>
+  `;
+}
+
+function pointEditControls ({type, point, isSaving, isDeleting, isDisabled}) {
   /* html */
   // console.log(`type: ${type}, point.id: ${point.id}`);
   return `
-    <button class="event__save-btn btn btn--blue" type="submit">Save</button>
-    ${createCancelDeleteButton({type})}
+    <!--<button class="event__save-btn btn btn--blue" type="submit">Save</button>-->
+    ${createSaveButton({isSaving, isDisabled})}
+    ${createCancelDeleteButton({type, isDeleting, isDisabled})}
     <!--<button class="event__reset-btn" type="reset">Cancel</button>-->
     ${!point.id ? '' : /* html */ `<button class="event__rollup-btn" type="button">
     <span class="visually-hidden">Close event</span></button>`}
@@ -131,7 +151,7 @@ function createEventType (type) {
 
 function createPointEditTemplate ({state, pointDestinations, pointOffers, type}) {
   // const {basePrice, dateFrom, dateTo, destination, type} = point;
-  const {point} = state;
+  const {point, isSaving, isDeleting, isDisabled} = state;
   const pointDestination = pointDestinations.find((dest) => dest.id === point.destination);
   // if (pointDestination) {
   //   console.log('pointDestination существует');
@@ -239,7 +259,7 @@ function createPointEditTemplate ({state, pointDestinations, pointOffers, type})
             <label class="event__label  event__type-output" for="event-destination-1">
               ${point.type}
             </label>
-            <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${(pointDestination) ? pointDestination.name : ' '}" list="destination-list-1">
+            <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${pointDestination ? he.encode(pointDestination.name) : ' '}" list="destination-list-1">
             <datalist id="destination-list-1">
             ${createDestinationList(pointDestinations)}
             </datalist>
@@ -263,7 +283,7 @@ function createPointEditTemplate ({state, pointDestinations, pointOffers, type})
             <!-- <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${point.basePrice}">-->
             <input class="event__input  event__input--price" id="event-price-1" type="number" min="0" max="1000" name="event-price" value="${point.basePrice}">
           </div>
-          ${pointEditControls({type, point})}
+          ${pointEditControls({type, point, isSaving, isDeleting, isDisabled})}
           <!-- <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
           <button class="event__reset-btn" type="reset">Cancel</button> -->
 
@@ -478,6 +498,6 @@ export default class PointEditView extends AbstractStatefulView {
   };
 
   // static parsePointToState = ({point}) => ({point});
-  static parsePointToState = ({point, pointDestinations}) => ({point, pointDestinations});
+  static parsePointToState = ({point, pointDestinations}) => ({point, pointDestinations, isDisabled: false, isSaving: false, isDeleting: false});
   static parseStateToPoint = (state) => state.point;
 }

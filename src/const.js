@@ -41,13 +41,14 @@ const EditType = {
 const UserAction = {
   UPDATE_POINT: 'UPDATE_POINT',
   DELETE_POINT: 'DELETE_POINT',
-  CREATE_POINT: 'CREATE_POINT'
+  ADD_POINT: 'ADD_POINT'
 };
 
 const UpdateType = {
   PATCH: 'PATCH',
   MINOR: 'MINOR',
-  MAJOR: 'MAJOR'
+  MAJOR: 'MAJOR',
+  INIT: 'INIT'
 };
 
 const FilterType = {

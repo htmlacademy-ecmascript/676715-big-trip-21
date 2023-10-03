@@ -4,7 +4,8 @@
 // import NewPointButtonView from './view/points-list-new-point-view.js';
 import FilterPresenter from './presenter/filter-presenter.js';
 import BoardPresenter from './presenter/board-presenter.js';
-import MockService from './service/mock-service.js';
+import PointService from './points-api-service.js';
+// import MockService from './service/mock-service.js';
 import DestinationsModel from './model/destinations-model.js';
 import OffersModel from './model/offer-model.js';
 import PointsModel from './model/points-model.js';
@@ -18,20 +19,29 @@ const tripInfoContainer = document.querySelector('.trip-main');
 const filterContainer = document.querySelector('.trip-controls__filters');
 const pointsListContainer = document.querySelector('.trip-events');
 
-const mockService = new MockService();
-const destinationsModel = new DestinationsModel(mockService);
-const offersModel = new OffersModel(mockService);
-const pointsModel = new PointsModel(mockService);
+const AVTORIZATION = 'Basic 87tdf12bg57hfuyfgb';
+const END_POINT = 'https://21.objects.pages.academy/big-trip';
+
+const pointApiService = new PointService(END_POINT, AVTORIZATION);
+// const mockService = new MockService();
+const destinationsModel = new DestinationsModel(pointApiService);
+const offersModel = new OffersModel(pointApiService);
+const pointsModel = new PointsModel({service: pointApiService, destinationsModel, offersModel});
 const filterModel = new FilterModel();
 
+// console.log(`offersModel: ${offersModel}, offersModel.length: ${offersModel.length}`);
+// console.log(`offersModel:`);
+// offersModel.forEach((offer) => {
+//   console.log (offer);
+// });
 // const newPointPresenter = new NewPointPresenter({
 //   container: pointInfoElement
 // });
 
 const filterPresenter = new FilterPresenter({
   container: filterContainer,
-  filterModel,
-  pointsModel
+  pointsModel,
+  filterModel
 });
 
 const boardPresenter = new BoardPresenter({
@@ -49,7 +59,7 @@ const boardPresenter = new BoardPresenter({
 // newPointPresenter.init({onButtonClick: boardPresenter.newPointButtonClickHandler});
 filterPresenter.init();
 boardPresenter.init();
-// pointsModel.init();
+pointsModel.init();
 
 // вариант из ретро
 // import FilterView from './view/filter-view.js';
