@@ -18,7 +18,6 @@ function createPointListEmptyMessage({message}) {
 export default class PointsListEmptyView extends AbstractView {
   #filterType = null;
 
-  // constructor({filterType}) {
   constructor(filterType) {
     super();
 

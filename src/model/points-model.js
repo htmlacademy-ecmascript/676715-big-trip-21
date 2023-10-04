@@ -14,7 +14,6 @@ export default class PointsModel extends Observable {
     this.#service = service;
     this.#destinationsModel = destinationsModel;
     this.#offersModel = offersModel;
-    // this.#points = this.#service.getPoints();
   }
 
   async init() {
@@ -24,14 +23,12 @@ export default class PointsModel extends Observable {
         this.#offersModel.init()
       ]);
       const points = await this.#service.points;
-      // console.log(`points: ${points}`);
       this.#points = points.map(this.#adaptToClient);
       this._notify(UpdateType.INIT, {isError: false});
     } catch(err) {
       this.#points = [];
       this._notify(UpdateType.INIT, {isError: true});
     }
-    // this._notify(UpdateType.INIT);
   }
 
   get() {

@@ -1,9 +1,3 @@
-const POINT_COUNT = 3;
-
-const DESTINATION_COUNT = 4;
-
-const OFFER_COUNT = 3;
-
 const TYPES = [
   'taxi',
   'bus',
@@ -74,4 +68,4 @@ const enabledSortType = {
   [SortType.OFFER]: false
 };
 
-export {POINT_COUNT, DESTINATION_COUNT, OFFER_COUNT, TYPES, POINT_EMPTY, FilterType, Mode, EditType, UserAction, UpdateType, SortType, enabledSortType};
+export {TYPES, POINT_EMPTY, FilterType, Mode, EditType, UserAction, UpdateType, SortType, enabledSortType};
