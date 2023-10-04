@@ -259,8 +259,10 @@ export default class BoardPresenter {
         this.#newPointPresenter.setSaving();
         try {
           await this.#pointsModel.add(updateType, update);
-        } catch {
+        } catch (err) {
           this.#newPointPresenter.setAborting();
+          this.#uiBlocker.unblock();
+          return Promise.reject();
         }
         break;
     }

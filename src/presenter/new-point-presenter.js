@@ -85,11 +85,18 @@ export default class NewPointPresenter {
     this.destroy();
   };
 
+  // #formSubmitHandler = (point) => {
+  //   this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point);
+  //   // this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MINOR, point);
+  //   // this.destroy({isCanceled: false});
+  //   this.destroy(false);
+  // };
+
   #formSubmitHandler = (point) => {
-    this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point);
     // this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MINOR, point);
     // this.destroy({isCanceled: false});
-    this.destroy(false);
+    this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point).then(() => this.destroy(false)).catch();
+    // this.destroy(false);
   };
 }
 
