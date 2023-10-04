@@ -1,9 +1,6 @@
 import PointEditView from '../view/points-list-point-edit-view.js';
 import {render, RenderPosition, remove} from '../framework/render.js';
-// import {remove} from '../framework/render.js';
-import {UserAction, UpdateType, Mode} from '../const.js';
-import {EditType} from '../const.js';
-// добавить EditType выше в const?
+import {UserAction, UpdateType, Mode, EditType} from '../const.js';
 
 export default class NewPointPresenter {
   #container = null;
@@ -86,41 +83,6 @@ export default class NewPointPresenter {
   };
 
   #formSubmitHandler = (point) => {
-    this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point);
-    // this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MINOR, point);
-    // this.destroy({isCanceled: false});
-    this.destroy(false);
+    this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point).then(() => this.destroy(false)).catch();
   };
 }
-
-
-// import NewPointButtonView from '../view/points-list-new-point-view';
-// import {render} from '../framework/render.js';
-
-// export default class NewPointPresenter {
-//   #container = null;
-//   #button = null;
-//   #handleButtonClick = null;
-
-//   constructor({container}) {
-//     this.#container = container;
-//   }
-
-//   init({onButtonClick}) {
-//     this.#handleButtonClick = onButtonClick;
-//     this.#button = new NewPointView({onClick: this.#buttonClickHandler});
-//     render(this.#button, this.#container);
-//   }
-
-//   disableButton() {
-//     this.#button.setDisabled(true);
-//   }
-
-//   enableButton() {
-//     this.#button.setDisabled(false);
-//   }
-
-//   #buttonClickHandler = () => {
-//     this.#handleButtonClick();
-//   };
-// }

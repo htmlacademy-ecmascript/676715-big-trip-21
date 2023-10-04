@@ -128,9 +128,7 @@ export default class PointPresenter {
   };
 
   #favoriteClickHandler = () => {
-    // перерисовывать список или point?
     this.#handleDataChange(UserAction.UPDATE_POINT, UpdateType.PATCH, {...this.#point, isFavorite: !this.#point.isFavorite});
-    // this.#handleDataChange({...this.#point, isFavorite: !this.#point.isFavorite});
   };
 
   #rollUpClickHandler = () => {
@@ -153,9 +151,4 @@ export default class PointPresenter {
     this.#handleDataChange(UserAction.UPDATE_POINT, isMinor ? UpdateType.MINOR : UpdateType.PATCH, updatedPoint);
     this.#replaceFormToPoint();
   };
-
-  // #formSubmitHandler = (point) => {
-  //   this.#handleDataChange(point);
-  //   this.#replaceFormToPoint();
-  // };
 }

@@ -17,10 +17,6 @@ function formatStringToDateTime(date) {
   return dayjs(date).format('YYYY-MM-DDTHH:mm');
 }
 
-// function formatStringToDateTime2(date) {
-//   return dayjs(date).format('YY/MM/DD HH:mm');
-// }
-
 function formatStringToShortDate(date) {
   return dayjs(date).format('MMM DD');
 }
@@ -52,18 +48,6 @@ function getPointDuration(dateFrom, dateTo) {
 function getScheduleDate(date) {
   return date ? dayjs(date).format('DD/MM/YY HH:mm') : '';
 }
-
-// function isPointFuture(point) {
-//   return dayjs().isBefore(point.dateFrom);
-// }
-
-// function isPointPresent(point) {
-//   return (dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo));
-// }
-
-// function isPointPast(point) {
-//   return dayjs().isAfter(point.dateTo);
-// }
 
 function isPointFuture(point) {
   return dayjs().isBefore(point.dateFrom);
@@ -99,5 +83,4 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// export {formatStringToDateTime, formatStringToDateTime2, formatStringToShortDate, formatStringToTime, isPointFuture, isPointPresent, isPointPast, getPointsDateDifference, getPointsDurationDifference, getPointsPriceDifference, isBigDifference, capitalizeFirstLetter};
 export {formatStringToDateTime, getScheduleDate, formatStringToShortDate, formatStringToTime, getPointDuration, isPointFuture, isPointPresent, isPointPast, getPointsDateDifference, getPointsDurationDifference, getPointsPriceDifference, isBigDifference, capitalizeFirstLetter};

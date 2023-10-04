@@ -8,10 +8,8 @@ export default class FilterModel extends Observable {
     return this.#filter;
   }
 
-  set(updateType, update) {
+  set(updateType) {
     this.#filter = updateType;
     this._notify = updateType;
-    // this._notify(updateType);
-    // this._notify(updateType, update);
   }
 }

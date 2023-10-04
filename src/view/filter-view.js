@@ -7,7 +7,6 @@ function createFilterElement (filtertElement, currentFilter) {
   return `
     <div class="trip-filters__filter">
       <input id="filter-${type}" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="${type}" ${type === currentFilter ? 'checked' : ''} ${hasPoints === 0 ? 'disabled' : ''}>
-      <!--<input id="filter-${type}" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="${type}" data-item="${type}">-->
       <label class="trip-filters__filter-label" for="filter-${type}">${capitalizeFirstLetter(type)}</label>
     </div>
   `;
@@ -39,26 +38,10 @@ export default class FilterView extends AbstractView {
   }
 
   get template() {
-    // return createFilter(this.#filters, this.#currentFilter);
     return createFilter({filters: this.#filters, currentFilter: this.#currentFilter});
   }
 
   #filterTypeChangeHandler = (evt) => {
-    // evt.preventDefault();
     this.#handleFilterTypeChange(evt.target.value);
   };
 }
-
-// export default class FilterView extends AbstractView {
-//   #filters = [];
-
-//   constructor(filters) {
-//     super();
-
-//     this.#filters = filters;
-//   }
-
-//   get template() {
-//     return createFilter({filters: this.#filters});
-//   }
-// }

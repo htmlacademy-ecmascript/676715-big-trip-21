@@ -1,6 +1,5 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import {SortType} from '../const.js';
-// import {capitalizeFirstLetter} from '../utils/point.js';
 
 function createSort (currentSortType) {
   /* html */
@@ -30,29 +29,7 @@ function createSort (currentSortType) {
   `;
 }
 
-// вариант, когда создается каждый элемент сортировки
-// function createSortElement ({type, isChecked, isDisabled}) {
-//   /* html */
-//   return
-// `
-//   <div class="trip-sort__item  trip-sort__item--${type}">
-//       <input id="sort-${type}" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-${type}" data-item="${type}" ${isChecked ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
-//       <label class="trip-sort__btn" for="sort-${type}">${capitalizeFirstLetter(type)}</label>
-//     </div>
-//   `;
-// }
-
-// function createSort (sorts) {
-//   /* html */
-//   return `
-//     <form class="trip-events__trip-sort  trip-sort" action="#" method="get">
-//       ${sorts.map((sortElement) => createSortElement(sortElement)).join('')}
-//     </form>
-//   `;
-// }
-
 export default class SortView extends AbstractView {
-  // #sorts = [];
   #currentSortType = null;
   #handleSortTypeChange = null;
 
@@ -74,24 +51,3 @@ export default class SortView extends AbstractView {
     this.#handleSortTypeChange(evt.target.dataset.sortType);
   };
 }
-
-
-// export default class SortView extends AbstractView {
-//   // #sorts = [];
-
-//   constructor(sorts) {
-//     super();
-
-//     this.#sorts = sorts;
-//   }
-
-//   get template() {
-//     return createSort({sorts: this.#sorts});
-//   }
-// }
-
-// export default class SortView extends AbstractView {
-//   get template() {
-//     return createSortElement();
-//   }
-// }

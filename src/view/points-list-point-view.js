@@ -3,7 +3,7 @@ import AbstractView from '../framework/view/abstract-view.js';
 import {formatStringToDateTime, formatStringToShortDate, formatStringToTime, getPointDuration} from '../utils/point.js';
 
 function createScheduleTemplate({dateFrom, dateTo}) {
-  /*html*/
+  /* html */
   return `
     <div class="event__schedule">
       <p class="event__time">
@@ -18,7 +18,7 @@ function createScheduleTemplate({dateFrom, dateTo}) {
 
 function generateItems(pointOffers) {
   return pointOffers.map((pointOffer) =>
-  /*html*/
+  /* html */
     `<li class="event__offer">
       <span class="event__offer-title">${pointOffer.title}</span>
       &plus;&euro;&nbsp;
@@ -28,7 +28,7 @@ function generateItems(pointOffers) {
 }
 
 function createOffersTemplate({pointOffers}) {
-  /*html*/
+  /* html */
   return `
     <h4 class="visually-hidden">Offers:</h4>
     <ul class="event__selected-offers">
@@ -39,7 +39,7 @@ function createOffersTemplate({pointOffers}) {
 
 function createControlsTemplate({isFavorite}) {
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
-  /*html*/
+  /* html */
   return `
     <button class="event__favorite-btn ${favoriteClassName}" type="button">
       <span class="visually-hidden">Add to favorite</span>
@@ -55,7 +55,7 @@ function createControlsTemplate({isFavorite}) {
 
 function createPointTemplate({point, pointDestination, pointOffers}) {
   const {basePrice, dateFrom, dateTo, isFavorite, type} = point;
-  /*html*/
+  /* html */
   return `
     <li class="trip-events__item">
       <div class="event">
