@@ -4,6 +4,7 @@ import FilterView from '../view/filter-view.js';
 // import {UpdateType} from '../const.js';
 import {render, replace} from '../framework/render.js';
 import {filter} from '../utils/filter.js';
+import {UpdateType} from '../const';
 
 export default class FilterPresenter {
   #container = null;
@@ -62,8 +63,8 @@ export default class FilterPresenter {
     if (this.#filterModel.get() === filterType) {
       return;
     }
-    this.#filterModel.set(filterType);
-    // this.#filterModel.set(UpdateType.MAJOR, filterType);
+    /*this.#filterModel.set(filterType);*/
+    this.#filterModel.set(UpdateType.MAJOR, filterType);
   };
 }
 
