@@ -224,10 +224,10 @@ export default class BoardPresenter {
     // this.#pointPresenters.forEach((presenter) => presenter.destroy());
     // this.#pointPresenters.clear();
     this.#clearPoints();
+    remove(this.#sortComponent);
+    this.#sortComponent = null;
     remove(this.#pointsListEmptyComponent);
     remove(this.#loadingComponent);
-    // remove(this.#sortComponent);
-    // this.#sortComponent = null;
 
     if (resetSortType) {
       this.#currentSortType = SortType.DAY;
