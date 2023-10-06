@@ -26,7 +26,6 @@ export default class PointsListEmptyView extends AbstractView {
   }
 
   get template() {
-
     return createPointListEmptyMessage(this.#filterType);
   }
 }
