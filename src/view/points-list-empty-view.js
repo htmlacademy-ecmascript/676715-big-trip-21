@@ -8,8 +8,9 @@ const FilterMessage = {
   [FilterType.PAST]: 'There are no past events now'
 };
 
-function createPointListEmptyMessage({message}) {
-  /*html*/
+function createPointListEmptyMessage(filterType) {
+  const message = FilterMessage[filterType];
+  /* html */
   return `
     <p class="trip-events__msg">${message}</p>
   `;
@@ -18,15 +19,14 @@ function createPointListEmptyMessage({message}) {
 export default class PointsListEmptyView extends AbstractView {
   #filterType = null;
 
-  constructor(filterType) {
+  constructor({filterType, isEmpty}) {
     super();
 
-    this.#filterType = filterType;
+    this.#filterType = isEmpty ? FilterType.EVERYTHING : filterType;
   }
 
   get template() {
-    const message = FilterMessage[this.#filterType];
 
-    return createPointListEmptyMessage({message});
+    return createPointListEmptyMessage(this.#filterType);
   }
 }

@@ -135,10 +135,10 @@ function createPointEditTemplate ({state, pointDestinations, pointOffers, type})
           </div>
 
           <div class="event__field-group  event__field-group--destination">
-            <label class="event__label  event__type-output" for="event-destination-1">
+            <label class="event__label  event__type-output" for="event-destination-${point.id}">
               ${point.type}
             </label>
-            <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${pointDestination ? he.encode(pointDestination.name) : ' '}" list="destination-list-1" required>
+            <input class="event__input  event__input--destination" id="event-destination-${point.id}" type="text" name="event-destination" value="${pointDestination ? he.encode(pointDestination.name) : ''}" list="destination-list-${point.id}" autocomplete="off" required>
             <datalist id="destination-list-1">
             ${createDestinationList(pointDestinations)}
             </datalist>
@@ -276,8 +276,14 @@ export default class PointEditView extends AbstractStatefulView {
   };
 
   #destinationChangeHandler = (evt) => {
+    evt.preventDefault();
     const selectedDestination = this._state.pointDestinations.find((pointDestination) => pointDestination.name === evt.target.value);
-    const selectedDestinationId = (selectedDestination) ? selectedDestination.id : null;
+
+    if (!selectedDestination) {
+      return;
+    }
+
+    const selectedDestinationId = selectedDestination.id;
 
     this.updateElement({point: {...this._state.point, destination: selectedDestinationId}});
   };
@@ -335,3 +341,4 @@ export default class PointEditView extends AbstractStatefulView {
   static parsePointToState = ({point, pointDestinations}) => ({point, pointDestinations, isDisabled: false, isSaving: false, isDeleting: false});
   static parseStateToPoint = (state) => state.point;
 }
+

@@ -27,7 +27,7 @@ export default class BoardPresenter {
 
   #loadingComponent = new LoadingView();
   #pointsListComponent = new PointsListView();
-  #pointsListEmptyComponent = new PointsListEmptyView();
+  #pointsListEmptyComponent = null;
   #sortComponent = null;
   #points = null;
 
@@ -36,6 +36,7 @@ export default class BoardPresenter {
   #newPointButton = null;
 
   #currentSortType = SortType.DAY;
+  #filterType = FilterType.EVERYTHING;
   #isCreating = false;
   #isLoading = true;
   #isLoadingError = false;
@@ -58,8 +59,8 @@ export default class BoardPresenter {
   }
 
   get points() {
-    const filterType = this.#filterModel.get();
-    const filteredPoints = filter[filterType](this.#pointsModel.get());
+    this.#filterType = this.#filterModel.get();
+    const filteredPoints = filter[this.#filterType](this.#pointsModel.get());
 
     return sort[this.#currentSortType](filteredPoints);
   }
@@ -99,7 +100,8 @@ export default class BoardPresenter {
   #renderPoints = () => this.points.forEach((point) => this.#renderPoint(point));
 
   #renderEmptyPointsList = () => {
-    this.#pointsListEmptyComponent = new PointsListEmptyView ({filterType: this.#filterModel.get()});
+    const isEmpty = (this.#pointsModel.points === 0);
+    this.#pointsListEmptyComponent = new PointsListEmptyView ({filterType: this.#filterType, isEmpty});
 
     render(this.#pointsListEmptyComponent, this.#pointsListContainer);
   };
@@ -144,13 +146,14 @@ export default class BoardPresenter {
   #clearBoard = ({resetSortType = false} = {}) => {
     this.#clearPoints();
     remove(this.#sortComponent);
-    this.#sortComponent = null;
-    remove(this.#pointsListEmptyComponent);
     remove(this.#loadingComponent);
+
+    if (this.#pointsListEmptyComponent) {
+      remove(this.#pointsListEmptyComponent);
+    }
 
     if (resetSortType) {
       this.#currentSortType = SortType.DAY;
-      this.#renderSort();
     }
   };
 
@@ -222,14 +225,18 @@ export default class BoardPresenter {
   };
 
   #modeChangeHandler = () => {
-    this.#pointPresenters.forEach((presenter) => presenter.resetView());
     this.#newPointPresenter.destroy();
+    if (this.points.length === 0) {
+      this.#renderEmptyPointsList();
+    }
+    this.#pointPresenters.forEach((presenter) => presenter.resetView());
+
   };
 
   #newPointButtonClickHandler = () => {
     this.#isCreating = true;
     this.#currentSortType = SortType.DAY;
-    this.#filterModel.set(FilterType.EVERYTHING);
+    this.#filterModel.set(UpdateType.MAJOR, FilterType.EVERYTHING);
     this.#newPointButton.setDisabled(true);
     this.#newPointPresenter.init();
     remove(this.#pointsListEmptyComponent);

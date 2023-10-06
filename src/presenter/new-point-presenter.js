@@ -83,6 +83,11 @@ export default class NewPointPresenter {
   };
 
   #formSubmitHandler = (point) => {
-    this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point).then(() => this.destroy(false)).catch();
+    if (!point.dateFrom || !point.dateTo || !point.basePrice) {
+      return;
+    } else {
+      this.#handleDataChange(UserAction.ADD_POINT, UpdateType.MAJOR, point);
+    }
+    document.removeEventListener('keydown', this.#escKeyHandler);
   };
 }
